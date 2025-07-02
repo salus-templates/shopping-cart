@@ -40,6 +40,111 @@ const mockFetchProducts = async () => {
       imageUrl: 'https://placehold.co/300x200/F08080/000000?text=Monitor',
       description: 'Stunning visuals for work and entertainment.'
     },
+    {
+      id: 'prod6',
+      name: 'Gaming Keyboard',
+      price: 79.99,
+      imageUrl: 'https://placehold.co/300x200/ADD8E6/000000?text=Keyboard',
+      description: 'Mechanical keyboard with RGB lighting.'
+    },
+    {
+      id: 'prod7',
+      name: 'Gaming Mouse',
+      price: 39.99,
+      imageUrl: 'https://placehold.co/300x200/FFB6C1/000000?text=Mouse',
+      description: 'High-precision sensor for competitive gaming.'
+    },
+    {
+      id: 'prod8',
+      name: 'Webcam 1080p',
+      price: 59.99,
+      imageUrl: 'https://placehold.co/300x200/DAA520/000000?text=Webcam',
+      description: 'Full HD video calls and streaming.'
+    },
+    {
+      id: 'prod9',
+      name: 'External SSD 1TB',
+      price: 129.99,
+      imageUrl: 'https://placehold.co/300x200/B0C4DE/000000?text=SSD',
+      description: 'Fast and portable storage solution.'
+    },
+    {
+      id: 'prod10',
+      name: 'USB-C Hub',
+      price: 29.99,
+      imageUrl: 'https://placehold.co/300x200/F4A460/000000?text=USB-C+Hub',
+      description: 'Expand your laptop\'s connectivity with multiple ports.'
+    },
+    {
+      id: 'prod11',
+      name: 'Noise-Cancelling Earbuds',
+      price: 129.99,
+      imageUrl: 'https://placehold.co/300x200/C0C0C0/000000?text=Earbuds',
+      description: 'Compact earbuds with active noise cancellation.'
+    },
+    {
+      id: 'prod12',
+      name: 'Smart Home Hub',
+      price: 89.99,
+      imageUrl: 'https://placehold.co/300x200/D8BFD8/000000?text=Smart+Hub',
+      description: 'Control all your smart devices from one place.'
+    },
+    {
+      id: 'prod13',
+      name: 'Robot Vacuum Cleaner',
+      price: 299.99,
+      imageUrl: 'https://placehold.co/300x200/AFEEEE/000000?text=Vacuum',
+      description: 'Automated cleaning for a spotless home.'
+    },
+    {
+      id: 'prod14',
+      name: 'Digital Camera',
+      price: 499.99,
+      imageUrl: 'https://placehold.co/300x200/F5DEB3/000000?text=Camera',
+      description: 'Capture stunning photos and videos.'
+    },
+    {
+      id: 'prod15',
+      name: 'Portable Projector',
+      price: 179.99,
+      imageUrl: 'https://placehold.co/300x200/9ACD32/000000?text=Projector',
+      description: 'Enjoy movies anywhere with a compact projector.'
+    },
+    {
+      id: 'prod16',
+      name: 'Fitness Tracker',
+      price: 69.99,
+      imageUrl: 'https://placehold.co/300x200/FFA07A/000000?text=Fitness+Tracker',
+      description: 'Monitor your activity, heart rate, and sleep.'
+    },
+    {
+      id: 'prod17',
+      name: 'Electric Toothbrush',
+      price: 45.99,
+      imageUrl: 'https://placehold.co/300x200/BDB76B/000000?text=Toothbrush',
+      description: 'Advanced cleaning for healthier gums.'
+    },
+    {
+      id: 'prod18',
+      name: 'Air Fryer',
+      price: 89.99,
+      imageUrl: 'https://placehold.co/300x200/E0FFFF/000000?text=Air+Fryer',
+      description: 'Cook healthier meals with less oil.'
+    },
+    {
+      id: 'prod19',
+      name: 'Coffee Maker',
+      price: 75.99,
+      imageUrl: 'https://placehold.co/300x200/D2B48C/000000?text=Coffee+Maker',
+      description: 'Brew your perfect cup of coffee every morning.'
+    },
+    {
+      id: 'prod20',
+      name: 'Smart Light Bulbs (2-pack)',
+      price: 25.99,
+      imageUrl: 'https://placehold.co/300x200/F0F8FF/000000?text=Smart+Bulbs',
+      description: 'Control your lighting with your voice or app.'
+    },
   ];
 };
 
@@ -100,7 +205,7 @@ const LoginPage = ({ onLogin }) => {
           {error && <p className="text-red-600 text-sm text-center">{error}</p>}
           <button
             type="submit"
-            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -138,7 +243,7 @@ const ProductList = ({ products, addToCart }) => {
                 <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">${product.price.toFixed(2)}</span>
                 <button
                   onClick={() => addToCart(product)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
                 >
                   Add to Cart
                 </button>
@@ -180,7 +285,7 @@ const CartPage = ({ cartItems, updateCartItemQuantity, removeFromCart, onCheckou
                   <div className="flex items-center border border-gray-300 dark:border-gray-500 rounded-lg">
                     <button
                       onClick={() => updateCartItemQuantity(item.id, item.quantity - 1)}
-                      className="px-3 py-1 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-l-lg transition"
+                      className="px-3 py-1 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-l-lg transition cursor-pointer"
                       disabled={item.quantity <= 1}
                     >
                       -
@@ -188,14 +293,14 @@ const CartPage = ({ cartItems, updateCartItemQuantity, removeFromCart, onCheckou
                     <span className="px-3 py-1 border-x border-gray-300 dark:border-gray-500 text-gray-800 dark:text-white">{item.quantity}</span>
                     <button
                       onClick={() => updateCartItemQuantity(item.id, item.quantity + 1)}
-                      className="px-3 py-1 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-r-lg transition"
+                      className="px-3 py-1 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-r-lg transition cursor-pointer"
                     >
                       +
                     </button>
                   </div>
                   <button
                     onClick={() => removeFromCart(item.id)}
-                    className="text-red-600 hover:text-red-800 transition duration-200"
+                    className="text-red-600 hover:text-red-800 transition duration-200 cursor-pointer"
                   >
                     Remove
                   </button>
@@ -210,7 +315,7 @@ const CartPage = ({ cartItems, updateCartItemQuantity, removeFromCart, onCheckou
           <div className="mt-8 text-center">
             <button
               onClick={onCheckout}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200 ease-in-out transform hover:scale-105"
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
             >
               Proceed to Checkout
             </button>
@@ -306,13 +411,13 @@ const CheckoutPage = ({ cartItems, onOrderPlaced, onBackToCart }) => {
         <div className="flex justify-between items-center mt-8">
           <button
             onClick={onBackToCart}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105 dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105 cursor-pointer dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
           >
             Back to Cart
           </button>
           <button
             onClick={handlePlaceOrder}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             disabled={isPlacingOrder || cartItems.length === 0}
           >
             {isPlacingOrder ? (
@@ -341,7 +446,7 @@ const OrderSuccessPage = ({ orderDetails, onContinueShopping }) => {
           </p>
           <button
             onClick={onContinueShopping}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
           >
             Continue Shopping
           </button>
@@ -388,7 +493,57 @@ const OrderSuccessPage = ({ orderDetails, onContinueShopping }) => {
 
         <button
           onClick={onContinueShopping}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200 ease-in-out transform hover:scale-105"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
+        >
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const OrderListPage = ({ allOrders, onContinueShopping }) => {
+  return (
+    <div className="p-6 bg-gray-50 dark:bg-gray-800 min-h-screen">
+      <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-10 text-center">Your Past Orders</h2>
+      {allOrders.length === 0 ? (
+        <p className="text-center text-gray-600 dark:text-gray-300 text-lg">You haven't placed any orders yet.</p>
+      ) : (
+        <div className="max-w-4xl mx-auto space-y-8">
+          {allOrders.map((order) => (
+            <div key={order.orderId} className="bg-white dark:bg-gray-700 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600 p-6">
+              <div className="flex justify-between items-center mb-4 border-b border-gray-200 dark:border-gray-600 pb-4">
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white">Order ID: <span className="text-blue-600 dark:text-blue-400">{order.orderId}</span></h3>
+                <span className="text-gray-600 dark:text-gray-300 text-sm">
+                  {new Date(order.orderDate).toLocaleString()}
+                </span>
+              </div>
+              <div className="mb-4">
+                <p className="text-gray-700 dark:text-gray-200 font-semibold mb-2">Items:</p>
+                <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                  {order.items.map((item) => (
+                    <li key={item.id}>
+                      {item.name} x {item.quantity} (${(item.price * item.quantity).toFixed(2)})
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mb-4">
+                <p className="text-gray-700 dark:text-gray-200 font-semibold mb-2">Delivery Address:</p>
+                <p className="text-gray-600 dark:text-gray-300">{order.deliveryAddress}</p>
+              </div>
+              <div className="pt-4 border-t border-gray-200 dark:border-gray-600 flex justify-between items-center">
+                <span className="text-lg font-bold text-gray-900 dark:text-white">Total:</span>
+                <span className="text-xl font-extrabold text-blue-700 dark:text-blue-400">${order.totalAmount.toFixed(2)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="mt-10 text-center">
+        <button
+          onClick={onContinueShopping}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
         >
           Continue Shopping
         </button>
@@ -403,8 +558,9 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState('products'); // 'products', 'cart', 'checkout', 'orderSuccess'
-  const [orderPlacedDetails, setOrderPlacedDetails] = useState(null); // New state for order details
+  const [allOrders, setAllOrders] = useState([]); // New state for all orders
+  const [currentPage, setCurrentPage] = useState('products'); // 'products', 'cart', 'checkout', 'orderSuccess', 'orderList'
+  const [orderPlacedDetails, setOrderPlacedDetails] = useState(null); // State for the most recently placed order details
   const [theme, setTheme] = useState(() => {
     // Check localStorage first
     const storedTheme = localStorage.getItem('theme');
@@ -444,8 +600,10 @@ const App = () => {
   useEffect(() => {
     const storedLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const storedAllOrders = JSON.parse(localStorage.getItem('allOrders')) || []; // Load all orders
     setIsLoggedIn(storedLoggedIn);
     setCartItems(storedCartItems);
+    setAllOrders(storedAllOrders); // Set all orders
 
     // Fetch products
     const fetchProducts = async () => {
@@ -464,6 +622,10 @@ const App = () => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
+  useEffect(() => {
+    localStorage.setItem('allOrders', JSON.stringify(allOrders)); // Persist all orders
+  }, [allOrders]);
+
   const handleLogin = () => {
     setIsLoggedIn(true);
     setCurrentPage('products');
@@ -472,6 +634,7 @@ const App = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCartItems([]);
+    setAllOrders([]); // Clear all orders on logout
     localStorage.clear(); // Clear all local storage on logout
     setCurrentPage('products'); // Go back to products page after logout
     setOrderPlacedDetails(null); // Clear any previous order details
@@ -510,8 +673,9 @@ const App = () => {
 
   // Called by CheckoutPage on successful order placement
   const handleOrderPlaced = (apiResult, orderDetails) => {
-    // Combine API result (like orderId) with full orderDetails
-    setOrderPlacedDetails({ ...orderDetails, orderId: apiResult.orderId });
+    const fullOrder = { ...orderDetails, orderId: apiResult.orderId };
+    setOrderPlacedDetails(fullOrder);
+    setAllOrders((prevOrders) => [...prevOrders, fullOrder]); // Add new order to allOrders
     setCartItems([]); // Clear cart after successful order
     setCurrentPage('orderSuccess'); // Navigate to the new order success page
   };
@@ -526,6 +690,7 @@ const App = () => {
       localStorage.clear();
       setIsLoggedIn(false);
       setCartItems([]);
+      setAllOrders([]); // Clear all orders on reset
       setProducts([]); // Re-fetch products on reset
       setCurrentPage('products');
       setOrderPlacedDetails(null); // Clear any previous order details
@@ -563,13 +728,13 @@ const App = () => {
             <nav className="flex items-center space-x-6">
               <button
                 onClick={() => setCurrentPage('products')}
-                className={`text-lg font-medium ${currentPage === 'products' ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'} pb-1 transition-colors`}
+                className={`text-lg font-medium ${currentPage === 'products' ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'} pb-1 transition-colors cursor-pointer`}
               >
                 Products
               </button>
               <button
                 onClick={() => setCurrentPage('cart')}
-                className={`text-lg font-medium ${currentPage === 'cart' ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'} pb-1 transition-colors relative`}
+                className={`text-lg font-medium ${currentPage === 'cart' ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'} pb-1 transition-colors relative cursor-pointer`}
               >
                 Cart
                 {cartItems.length > 0 && (
@@ -579,8 +744,14 @@ const App = () => {
                 )}
               </button>
               <button
+                onClick={() => setCurrentPage('orderList')}
+                className={`text-lg font-medium ${currentPage === 'orderList' ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'} pb-1 transition-colors cursor-pointer`}
+              >
+                Orders
+              </button>
+              <button
                 onClick={toggleTheme}
-                className="p-2 rounded-full bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-white shadow-sm hover:shadow-md transition-all duration-200"
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-white shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
                 title="Toggle Theme"
               >
                 {theme === 'dark' ? (
@@ -595,13 +766,13 @@ const App = () => {
               </button>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
               >
                 Logout
               </button>
               <button
                 onClick={handleResetApp}
-                className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
               >
                 Reset App
               </button>
@@ -624,13 +795,19 @@ const App = () => {
             {currentPage === 'checkout' && (
               <CheckoutPage
                 cartItems={cartItems}
-                onOrderPlaced={handleOrderPlaced} // Changed prop name and signature
+                onOrderPlaced={handleOrderPlaced}
                 onBackToCart={() => setCurrentPage('cart')}
               />
             )}
             {currentPage === 'orderSuccess' && (
               <OrderSuccessPage
                 orderDetails={orderPlacedDetails}
+                onContinueShopping={handleContinueShopping}
+              />
+            )}
+            {currentPage === 'orderList' && (
+              <OrderListPage
+                allOrders={allOrders}
                 onContinueShopping={handleContinueShopping}
               />
             )}

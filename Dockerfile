@@ -24,7 +24,7 @@ FROM caddy:2-alpine
 # Embed the Caddyfile directly into the container using a heredoc
 # This makes the Caddyfile configuration much cleaner and easier to read.
 COPY <<EOF /etc/caddy/Caddyfile
-:80 {
+:8080 {
     root * /usr/share/caddy
     file_server
     try_files {path} /index.html
@@ -37,7 +37,7 @@ EOF
 COPY --from=builder /app/dist /usr/share/caddy
 
 # Expose port 80 for web traffic
-EXPOSE 80
+EXPOSE 8080
 
 # Caddy will automatically run as the main process due to the base image's ENTRYPOINT
 # No CMD instruction is typically needed here, as Caddy will use the Caddyfile.

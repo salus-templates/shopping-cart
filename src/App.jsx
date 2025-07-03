@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// Mock API calls
+// Mock API calls (products and order placement remain mock)
 const mockFetchProducts = async () => {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 500));
@@ -148,13 +148,6 @@ const mockFetchProducts = async () => {
   ];
 };
 
-const mockLogin = async (passkey) => {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  // Simple mock: any passkey works for now
-  return passkey === '12345'; // Example passkey
-};
-
 const mockPlaceOrder = async (orderDetails) => {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -170,16 +163,50 @@ const LoginPage = ({ onLogin }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // Read Go API server URL from environment variable using import.meta.env
+  // This is the correct way to access environment variables in a Vite-based React app.
+  // The warning about "es2015" target suggests your project's build configuration
+  // might be set to an older JavaScript version that doesn't fully support import.meta.
+  // Ensure your vite.config.js or tsconfig.json targets a modern ES version (e.g., es2020 or esnext).
+  const GO_API_URL = import.meta.env.VITE_GO_API_URL || 'http://localhost:8090';
+
+  // Renamed from handleGoLogin to handleLogin
+  const handleLogin = async (passkey) => {
+    try {
+      const response = await fetch(`${GO_API_URL}/auth`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ passkey: passkey }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.success;
+    } catch (err) {
+      console.error("Login API call failed:", err);
+      setError(`Failed to connect to authentication service at ${GO_API_URL}. Please check the server and try again.`);
+      return false;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-    const success = await mockLogin(passkey);
+    // Use the renamed handleLogin function
+    const success = await handleLogin(passkey);
     setIsLoading(false);
     if (success) {
       onLogin();
     } else {
-      setError('Invalid passkey. Please try again.');
+      if (!error) {
+        setError('Invalid passkey. Please try again.');
+      }
     }
   };
 
@@ -586,8 +613,9 @@ const App = () => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e) => {
       // Only update if user hasn't manually set a theme (or if you want it to always follow system)
-      // For this example, we'll let manual override persist, but if localStorage is cleared, it defaults to system.
-      if (!localStorage.getItem('theme')) { // Only auto-switch if no manual theme is set
+      // For this example, we'll let manual override persist, but if localStorage is cleared, it's fine.
+      // If a user explicitly sets a theme, we want that to stick.
+      if (!localStorage.getItem('theme')) {
         setTheme(e.matches ? 'dark' : 'light');
       }
     };

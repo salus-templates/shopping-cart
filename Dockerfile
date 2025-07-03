@@ -14,6 +14,8 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
+ARG VITE_GO_API_URL
+
 # Build the React application for production
 # Vite's default build output is to the 'dist' directory
 RUN npm run build

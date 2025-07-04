@@ -1,160 +1,69 @@
 import React, { useState, useEffect } from 'react';
 
-// Mock API calls (products and order placement remain mock)
-const mockFetchProducts = async () => {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return [
-    {
-      id: 'prod1',
-      name: 'Wireless Headphones',
-      price: 99.99,
-      imageUrl: 'https://placehold.co/300x200/FFD700/000000?text=Headphones',
-      description: 'High-fidelity sound with noise cancellation.'
-    },
-    {
-      id: 'prod2',
-      name: 'Smartwatch',
-      price: 199.99,
-      imageUrl: 'https://placehold.co/300x200/87CEEB/000000?text=Smartwatch',
-      description: 'Track your fitness and receive notifications.'
-    },
-    {
-      id: 'prod3',
-      name: 'Portable Bluetooth Speaker',
-      price: 49.99,
-      imageUrl: 'https://placehold.co/300x200/98FB98/000000?text=Speaker',
-      description: 'Compact and powerful sound on the go.'
-    },
-    {
-      id: 'prod4',
-      name: 'Ergonomic Office Chair',
-      price: 249.99,
-      imageUrl: 'https://placehold.co/300x200/DDA0DD/000000?text=Chair',
-      description: 'Comfortable and supportive for long working hours.'
-    },
-    {
-      id: 'prod5',
-      name: '4K UHD Monitor',
-      price: 399.99,
-      imageUrl: 'https://placehold.co/300x200/F08080/000000?text=Monitor',
-      description: 'Stunning visuals for work and entertainment.'
-    },
-    {
-      id: 'prod6',
-      name: 'Gaming Keyboard',
-      price: 79.99,
-      imageUrl: 'https://placehold.co/300x200/ADD8E6/000000?text=Keyboard',
-      description: 'Mechanical keyboard with RGB lighting.'
-    },
-    {
-      id: 'prod7',
-      name: 'Gaming Mouse',
-      price: 39.99,
-      imageUrl: 'https://placehold.co/300x200/FFB6C1/000000?text=Mouse',
-      description: 'High-precision sensor for competitive gaming.'
-    },
-    {
-      id: 'prod8',
-      name: 'Webcam 1080p',
-      price: 59.99,
-      imageUrl: 'https://placehold.co/300x200/DAA520/000000?text=Webcam',
-      description: 'Full HD video calls and streaming.'
-    },
-    {
-      id: 'prod9',
-      name: 'External SSD 1TB',
-      price: 129.99,
-      imageUrl: 'https://placehold.co/300x200/B0C4DE/000000?text=SSD',
-      description: 'Fast and portable storage solution.'
-    },
-    {
-      id: 'prod10',
-      name: 'USB-C Hub',
-      price: 29.99,
-      imageUrl: 'https://placehold.co/300x200/F4A460/000000?text=USB-C+Hub',
-      description: 'Expand your laptop\'s connectivity with multiple ports.'
-    },
-    {
-      id: 'prod11',
-      name: 'Noise-Cancelling Earbuds',
-      price: 129.99,
-      imageUrl: 'https://placehold.co/300x200/C0C0C0/000000?text=Earbuds',
-      description: 'Compact earbuds with active noise cancellation.'
-    },
-    {
-      id: 'prod12',
-      name: 'Smart Home Hub',
-      price: 89.99,
-      imageUrl: 'https://placehold.co/300x200/D8BFD8/000000?text=Smart+Hub',
-      description: 'Control all your smart devices from one place.'
-    },
-    {
-      id: 'prod13',
-      name: 'Robot Vacuum Cleaner',
-      price: 299.99,
-      imageUrl: 'https://placehold.co/300x200/AFEEEE/000000?text=Vacuum',
-      description: 'Automated cleaning for a spotless home.'
-    },
-    {
-      id: 'prod14',
-      name: 'Digital Camera',
-      price: 499.99,
-      imageUrl: 'https://placehold.co/300x200/F5DEB3/000000?text=Camera',
-      description: 'Capture stunning photos and videos.'
-    },
-    {
-      id: 'prod15',
-      name: 'Portable Projector',
-      price: 179.99,
-      imageUrl: 'https://placehold.co/300x200/9ACD32/000000?text=Projector',
-      description: 'Enjoy movies anywhere with a compact projector.'
-    },
-    {
-      id: 'prod16',
-      name: 'Fitness Tracker',
-      price: 69.99,
-      imageUrl: 'https://placehold.co/300x200/FFA07A/000000?text=Fitness+Tracker',
-      description: 'Monitor your activity, heart rate, and sleep.'
-    },
-    {
-      id: 'prod17',
-      name: 'Electric Toothbrush',
-      price: 45.99,
-      imageUrl: 'https://placehold.co/300x200/BDB76B/000000?text=Toothbrush',
-      description: 'Advanced cleaning for healthier gums.'
-    },
-    {
-      id: 'prod18',
-      name: 'Air Fryer',
-      price: 89.99,
-      imageUrl: 'https://placehold.co/300x200/E0FFFF/000000?text=Air+Fryer',
-      description: 'Cook healthier meals with less oil.'
-    },
-    {
-      id: 'prod19',
-      name: 'Coffee Maker',
-      price: 75.99,
-      imageUrl: 'https://placehold.co/300x200/D2B48C/000000?text=Coffee+Maker',
-      description: 'Brew your perfect cup of coffee every morning.'
-    },
-    {
-      id: 'prod20',
-      name: 'Smart Light Bulbs (2-pack)',
-      price: 25.99,
-      imageUrl: 'https://placehold.co/300x200/F0F8FF/000000?text=Smart+Bulbs',
-      description: 'Control your lighting with your voice or app.'
-    },
-  ];
+// API URL for the Go proxy service
+// This will be read from the .env file (e.g., VITE_GO_API_URL=http://localhost:8090)
+// The 'import.meta.env' syntax is standard for Vite to expose environment variables
+// that are processed at build time. If you encounter warnings about 'es2015' target,
+// please ensure your Vite build configuration targets a more modern ECMAScript version (e.g., es2020 or esnext).
+const GO_API_BASE_URL = import.meta.env.VITE_GO_API_URL || 'http://localhost:8090';
+
+// Updated mockFetchProducts to fetch from Go proxy and include stock
+const fetchProductsFromGoProxy = async () => {
+  try {
+    const response = await fetch(`${GO_API_BASE_URL}/products`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch products from Go proxy:", error);
+    // Fallback to a static list or show an error message in a real app
+    return [
+      // Fallback products if API fails
+      {
+        id: 'fallback1',
+        name: 'Fallback Item 1',
+        price: 10.00,
+        imageUrl: 'https://placehold.co/300x200/FF0000/FFFFFF?text=Error',
+        description: 'Product data could not be loaded.',
+        stock: 0
+      },
+      {
+        id: 'fallback2',
+        name: 'Fallback Item 2',
+        price: 15.00,
+        imageUrl: 'https://placehold.co/300x200/00FF00/000000?text=Error',
+        description: 'Please check backend services.',
+        stock: 0
+      }
+    ];
+  }
 };
 
-const mockPlaceOrder = async (orderDetails) => {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  console.log('Mock Order Placed:', orderDetails);
-  // Simulate success
-  return { success: true, message: 'Order placed successfully!', orderId: 'ORD' + Date.now() };
+// New: Function to place order via Go proxy
+const placeOrderViaGoProxy = async (orderDetails) => {
+  try {
+    const response = await fetch(`${GO_API_BASE_URL}/order`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderDetails),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data; // This will contain { success, message, orderId, outOfStockItems }
+  } catch (error) {
+    console.error("Failed to place order via Go proxy:", error);
+    return { success: false, message: "Network error or backend service unavailable." };
+  }
 };
+
 
 // --- Components ---
 
@@ -164,16 +73,11 @@ const LoginPage = ({ onLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Read Go API server URL from environment variable using import.meta.env
-  // This is the correct way to access environment variables in a Vite-based React app.
-  // The warning about "es2015" target suggests your project's build configuration
-  // might be set to an older JavaScript version that doesn't fully support import.meta.
-  // Ensure your vite.config.js or tsconfig.json targets a modern ES version (e.g., es2020 or esnext).
-  const GO_API_URL = import.meta.env.VITE_GO_API_URL || 'http://localhost:8090';
+  const GO_AUTH_API_URL = import.meta.env.VITE_GO_API_URL || 'http://localhost:8090';
 
-  // Renamed from handleGoLogin to handleLogin
   const handleLogin = async (passkey) => {
     try {
-      const response = await fetch(`${GO_API_URL}/auth`, {
+      const response = await fetch(`${GO_AUTH_API_URL}/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -189,7 +93,7 @@ const LoginPage = ({ onLogin }) => {
       return data.success;
     } catch (err) {
       console.error("Login API call failed:", err);
-      setError(`Failed to connect to authentication service at ${GO_API_URL}. Please check the server and try again.`);
+      setError(`Failed to connect to authentication service at ${GO_AUTH_API_URL}. Please check the server and try again.`);
       return false;
     }
   };
@@ -198,7 +102,6 @@ const LoginPage = ({ onLogin }) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-    // Use the renamed handleLogin function
     const success = await handleLogin(passkey);
     setIsLoading(false);
     if (success) {
@@ -275,6 +178,9 @@ const ProductList = ({ products, addToCart }) => {
                   Add to Cart
                 </button>
               </div>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                Stock: {product.stock > 0 ? product.stock : 'Out of Stock'}
+              </p>
             </div>
           </div>
         ))}
@@ -380,19 +286,23 @@ const CheckoutPage = ({ cartItems, onOrderPlaced, onBackToCart }) => {
       orderDate: new Date().toISOString(),
     };
 
-    try {
-      const result = await mockPlaceOrder(orderDetails);
-      if (result.success) {
-        // Pass both the mock API result and the constructed orderDetails
-        onOrderPlaced(result, orderDetails);
-      } else {
-        setOrderMessage('Failed to place order. Please try again.');
+    // Use the new placeOrderViaGoProxy function
+    const result = await placeOrderViaGoProxy(orderDetails);
+    setIsPlacingOrder(false);
+
+    if (result.success) {
+      setOrderMessage(result.message + ` (Order ID: ${result.orderId})`);
+      onOrderPlaced(result, orderDetails); // Pass the full result and original details
+    } else {
+      let errorMessage = result.message || 'Failed to place order. Please try again.';
+      if (result.outOfStockItems && result.outOfStockItems.length > 0) {
+        const itemNames = result.outOfStockItems.map(id => {
+          const cartItem = cartItems.find(item => item.id === id);
+          return cartItem ? cartItem.name : id;
+        }).join(', ');
+        errorMessage += ` Out of stock for: ${itemNames}.`;
       }
-    } catch (error) {
-      console.error('Error placing order:', error);
-      setOrderMessage('An error occurred while placing your order.');
-    } finally {
-      setIsPlacingOrder(false);
+      setOrderMessage(errorMessage);
     }
   };
 
@@ -633,9 +543,9 @@ const App = () => {
     setCartItems(storedCartItems);
     setAllOrders(storedAllOrders); // Set all orders
 
-    // Fetch products
+    // Fetch products using the new proxy function
     const fetchProducts = async () => {
-      const fetchedProducts = await mockFetchProducts();
+      const fetchedProducts = await fetchProductsFromGoProxy();
       setProducts(fetchedProducts);
     };
     fetchProducts();
@@ -724,7 +634,7 @@ const App = () => {
       setOrderPlacedDetails(null); // Clear any previous order details
       // Re-fetch products after clearing to ensure fresh state
       const fetchProducts = async () => {
-        const fetchedProducts = await mockFetchProducts();
+        const fetchedProducts = await fetchProductsFromGoProxy(); // Use the proxy fetch
         setProducts(fetchedProducts);
       };
       fetchProducts();

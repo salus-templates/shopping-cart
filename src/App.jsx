@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 // API URL for the Go proxy service
-// This will be read from the .env file (e.g., VITE_GO_API_URL=http://localhost:8090)
-// The 'import.meta.env' syntax is standard for Vite to expose environment variables
-// that are processed at build time. If you encounter warnings about 'es2015' target,
-// please ensure your Vite build configuration targets a more modern ECMAScript version (e.g., es2020 or esnext).
+// This value is read from environment variables (e.g., VITE_GO_API_URL in .env file).
+// In Vite, 'import.meta.env' is the standard way to access these variables,
+// which are then bundled into the static site during the build process.
+// If you see warnings about 'import.meta' not being available for 'es2015' target,
+// it indicates that your project's JavaScript compilation target might need to be
+// updated to a more modern ECMAScript version (e.g., es2020 or esnext) in your
+// vite.config.js or tsconfig.json to fully support this syntax.
 const GO_API_BASE_URL = import.meta.env.VITE_GO_API_URL || 'http://localhost:8090';
 
 // Updated mockFetchProducts to fetch from Go proxy and include stock
@@ -52,11 +55,20 @@ const placeOrderViaGoProxy = async (orderDetails) => {
       body: JSON.stringify(orderDetails),
     });
 
+    // Always attempt to parse JSON response, even if response.ok is false,
+    // as the backend sends structured error messages.
+    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      // If it's a 400 Bad Request (out of stock), the 'data' object will
+      // contain the 'success: false' and 'outOfStockItems' information.
+      // For other non-2xx errors, we can still return the data (if available)
+      // or a generic error.
+      console.error(`HTTP error! Status: ${response.status}`, data);
+      // Return the parsed data, which should contain success: false and a message
+      return data;
     }
 
-    const data = await response.json();
     return data; // This will contain { success, message, orderId, outOfStockItems }
   } catch (error) {
     console.error("Failed to place order via Go proxy:", error);
@@ -358,7 +370,7 @@ const CheckoutPage = ({ cartItems, onOrderPlaced, onBackToCart }) => {
             disabled={isPlacingOrder || cartItems.length === 0}
           >
             {isPlacingOrder ? (
-              <svg className="animate-spin h-5 w-5 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>

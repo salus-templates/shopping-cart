@@ -14,7 +14,8 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-ENV VITE_GO_API_URL=https://sleepy-williamson-a6bf08c9.salus.dev
+ARG VITE_GO_API_URL
+ENV VITE_GO_API_URL=$VITE_GO_API_URL
 
 # Build the React application for production
 # Vite's default build output is to the 'dist' directory

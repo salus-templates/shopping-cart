@@ -24,6 +24,9 @@ RUN npm run build
 # Stage 2: Serve the application with Caddy
 FROM caddy:2-alpine
 
+# remove capability for binding to lower ports.
+RUN setcap -r /usr/bin/caddy
+
 # Embed the Caddyfile directly into the container using a heredoc
 # This makes the Caddyfile configuration much cleaner and easier to read.
 COPY <<EOF /etc/caddy/Caddyfile

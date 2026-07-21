@@ -16,4 +16,5 @@ If deployed as a webapp, the app is exposed on port `8080` .
 
 ### Environment Variables
 
+
 - `VITE_GO_API_URL` - URL for the shopping cart API, without the trailing slash. e.g. `http://localhost:8080`.
